@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
             if(res != null && res.size() != 0) {
                 for(int i =0; i < res.size(); ++i) {
                     DefaultSliderView sliderView = new DefaultSliderView(getActivity());
-                    sliderView.image(res.get(0)).setScaleType(BaseSliderView.ScaleType.Fit);
+                    sliderView.image(res.get(i)).setScaleType(BaseSliderView.ScaleType.Fit);
 
                     slidingImages.addSlider(sliderView);
                 }

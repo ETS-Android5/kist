@@ -5,12 +5,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import java.util.Stack;
 
 import example.com.kist.Constant.NonSwipingViewPager;
 import example.com.kist.R;
@@ -19,17 +23,22 @@ import example.com.kist.R;
  * Created by pr0 on 2/8/17.
  */
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, DrawerLayout.DrawerListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,
+        DrawerLayout.DrawerListener, ViewPager.OnPageChangeListener {
     NonSwipingViewPager mainPager;
     RelativeLayout main;
 
     ImageView booking, currency, info, map, home, menu;                                             //all toolbar options
     LinearLayout menuHome, menuDetails, menuGuide, menuBookings,
-            menuNotice, menuContact, menuFeedback, menuDeveloper;                                   //all menu items
-
+            menuNotice, menuContact, menuFeedback, menuDeveloper, back;
     DrawerLayout rootLay;
 
+    TextView header;
+
     MainPagerAdapter adapter;
+
+    private Stack<Integer> stackkk = new Stack<>(); // Edited
+    private int tabPosition = 0;
 
     @Override
     protected void onCreate(Bundle onSavedInstanceState) {
@@ -44,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         adapter = new MainPagerAdapter(getSupportFragmentManager());
         mainPager.setAdapter(adapter);
+
+        mainPager.addOnPageChangeListener(this);
 
         home.setAlpha(0.5f);
     }
@@ -68,7 +79,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menuDeveloper = (LinearLayout) findViewById(R.id.menu_developer);
 
         main = (RelativeLayout) findViewById(R.id.main);
+        header = (TextView) findViewById(R.id.headerName);
 
+        back = (LinearLayout) findViewById(R.id.back);
+
+        header.setText("THE BLOCKS APP");
         mainPager = (NonSwipingViewPager) findViewById(R.id.main_pager);
     }
     private void setOnClickListeners() {
@@ -87,25 +102,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menuDetails.setOnClickListener(this);
         menuGuide.setOnClickListener(this);
         menuHome.setOnClickListener(this);
+
+        back.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if(v == booking) {
-            changeAlphaAll();
-            v.setAlpha(0.5f);
+
         } else if(v == currency) {
             changeAlphaAll();
             v.setAlpha(0.5f);
         } else if(v == info) {
-            changeAlphaAll();
-            v.setAlpha(0.5f);
+            mainPager.setCurrentItem(1);
+            tabPosition = 1;
+
+            pushToStack();
         } else if(v == map) {
-            changeAlphaAll();
-            v.setAlpha(0.5f);
         } else if(home == v) {
-            changeAlphaAll();
-            v.setAlpha(0.5f);
+            mainPager.setCurrentItem(0);
+            tabPosition = 1;
+
+            pushToStack();
         } else if(v == menu) {
             if(rootLay.isDrawerOpen(GravityCompat.END))
                 rootLay.closeDrawer(GravityCompat.END);
@@ -127,6 +145,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             rootLay.closeDrawer(GravityCompat.END);
         } else if(v == menuGuide) {
             rootLay.closeDrawer(GravityCompat.END);
+        } else if(v == back) {
+            if (stackkk.size() > 1) {
+                stackkk.pop();
+                mainPager.setCurrentItem(stackkk.lastElement());
+            } else {
+                back.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -174,9 +199,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        if(position == 0) {
+            changeAlphaAll();
+            home.setAlpha(0.5f);
+
+            back.setVisibility(View.GONE);
+        } else if(position == 1) {
+            changeAlphaAll();
+            info.setAlpha(0.5f);
+            header.setText("ABOUT US");
+
+            back.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
     public class MainPagerAdapter extends FragmentStatePagerAdapter {
 
-        private int TOTAL_PAGES = 1;
+        private int TOTAL_PAGES = 2;
 
         public MainPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -193,7 +244,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             if(position == 0) {
                 fragment = new HomeFragment();
+            } else if(position == 1) {
+                fragment = new HostelDetailsFragment();
             }
+
             return fragment;
         }
 
@@ -201,5 +255,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public int getItemPosition(Object object) {
             return POSITION_NONE;
         }
+    }
+
+    private void pushToStack() {
+        if (stackkk.empty())
+            stackkk.push(0);
+
+        if (stackkk.contains(tabPosition)) {
+            stackkk.remove(stackkk.indexOf(tabPosition));
+            stackkk.push(tabPosition);
+        } else {
+            stackkk.push(tabPosition);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (stackkk.size() > 1) {
+            stackkk.pop();
+            mainPager.setCurrentItem(stackkk.lastElement());
+        } else
+            super.onBackPressed();
     }
 }
