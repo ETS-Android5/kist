@@ -112,8 +112,6 @@
             android:background="#000"/>
         <example.com.kist.Constant.NonSwipingViewPager
             android:id="@+id/main_pager"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
             android:layout_above="@id/bottom_line"
             android:layout_below="@id/topLine"
             android:layout_width="match_parent"

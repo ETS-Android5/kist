@@ -1,12 +1,14 @@
 package example.com.kist.Constant;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,11 +18,14 @@ import java.util.List;
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
 
-    List<Integer> mThumbIds;
+    List<Integer> mThumbIds = new ArrayList<>();
+
     // Constructor
     public ImageAdapter(Context c, List<Integer> mThumbIds) {
         mContext = c;
         this.mThumbIds = mThumbIds;
+
+        Log.e("thumbs", mThumbIds.size() + "");
     }
 
     public int getCount() {
@@ -47,6 +52,7 @@ public class ImageAdapter extends BaseAdapter {
         } else {
             imageView = (ImageView) convertView;
         }
+
         imageView.setImageResource(mThumbIds.get(position));
         return imageView;
     }

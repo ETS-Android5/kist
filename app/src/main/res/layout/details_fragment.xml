@@ -105,6 +105,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:numColumns="2"
+                        android:stretchMode="columnWidth"
                         android:layout_marginTop="40dp"
                         android:layout_marginBottom="40dp"
                         android:gravity="center"
@@ -115,10 +116,10 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:textSize="18sp"
+                        android:layout_marginTop="40dp"
                         android:text="FACILITIES"
                         android:textStyle="bold"
-                        android:textColor="#000"
-                        android:layout_marginTop="10dp"/>
+                        android:textColor="#000"/>
                     <example.com.kist.Constant.ExpandableHeightGridView
                         android:id="@+id/facilities"
                         android:layout_width="match_parent"
@@ -131,6 +132,7 @@
                         android:horizontalSpacing="15dp"/>
                     <ImageView
                         android:id="@+id/contact_us"
+                        android:layout_marginTop="40dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:src="@mipmap/contactusbutton"/>

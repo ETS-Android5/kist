@@ -1,5 +1,6 @@
 package example.com.kist.Activities;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -9,7 +10,9 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -175,10 +178,13 @@ public class HostelDetailsFragment extends Fragment implements View.OnClickListe
         if (cursor.moveToFirst()) {
             do {
                 String temp = cursor.getString(cursor.getColumnIndexOrThrow("PhotoName")).toLowerCase();
+                Log.e("temp", temp);
+
                 if(Character.isDigit(temp.charAt(0)))
                         names.add("_" + temp);
                 else
                     names.add(temp);
+                Log.e("name", names.get(0));
             } while (cursor.moveToNext());
         }
 
@@ -310,7 +316,52 @@ public class HostelDetailsFragment extends Fragment implements View.OnClickListe
 
     private void makeCall() {
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone));
-        startActivity(intent);
+
+        if (ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.CALL_PHONE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.CALL_PHONE},
+                    5);
+
+            // MY_PERMISSIONS_REQUEST_CALL_PHONE is an
+            // app-defined int constant. The callback method gets the
+            // result of the request.
+        } else {
+            //You already have permission
+            try {
+                startActivity(intent);
+            } catch (SecurityException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 5: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the phone call
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone));
+                    startActivity(intent);
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 
     private void makeEmail() {
