@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import example.com.kist.Activities.MainActivity;
+
 /**
  * Created by pr0 on 3/8/17.
  */
@@ -19,11 +21,13 @@ public class ImageAdapter extends BaseAdapter {
     private Context mContext;
 
     List<Integer> mThumbIds = new ArrayList<>();
+    List<String> types = new ArrayList<>();
 
     // Constructor
-    public ImageAdapter(Context c, List<Integer> mThumbIds) {
+    public ImageAdapter(Context c, List<Integer> mThumbIds, List<String> types) {
         mContext = c;
         this.mThumbIds = mThumbIds;
+        this.types = types;
 
         Log.e("thumbs", mThumbIds.size() + "");
     }
@@ -41,7 +45,7 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     // create a new ImageView for each item referenced by the Adapter
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, ViewGroup parent) {
         ImageView imageView;
 
         if (convertView == null) {
@@ -54,6 +58,15 @@ public class ImageAdapter extends BaseAdapter {
         }
 
         imageView.setImageResource(mThumbIds.get(position));
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("cliked0", "image");
+                ((MainActivity) mContext).setDetailsPage(2, types.get(position));
+            }
+        });
+
         return imageView;
     }
 }

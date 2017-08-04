@@ -31,6 +31,7 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import example.com.kist.Constant.ExpandableHeightGridView;
@@ -55,6 +56,7 @@ public class HostelDetailsFragment extends Fragment implements View.OnClickListe
     String name, description1, description2, phone, address, email, webPage, longt, lat, instaUrl, fbUrl, tripUrl;
 
     SQLiteDatabase db;
+    List<String> types = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle SavedInstanceState) {
@@ -101,17 +103,10 @@ public class HostelDetailsFragment extends Fragment implements View.OnClickListe
 
             List<Integer> thumbs = queryForThumb();
 
-            ImageAdapter adapter = new ImageAdapter(getActivity(), thumbs);
+            ImageAdapter adapter = new ImageAdapter(getActivity(), thumbs, types);
             rooms.setAdapter(adapter);
 
             rooms.setExpanded(true);
-
-            rooms.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                }
-            });
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -177,11 +172,19 @@ public class HostelDetailsFragment extends Fragment implements View.OnClickListe
     private List<Integer> queryForThumb() {
         List<String> names = new ArrayList<>();
 
-        Cursor cursor = db.query("ThumbnailLookup", new String[]{"PhotoName"},
+        Cursor cursor = db.query("ThumbnailLookup", new String[]{"PhotoName", "ID"},
                 "Area = " + "\'" + "Beds" + "\'" , null, null, null, null);
         if (cursor.moveToFirst()) {
             do {
-                String temp = cursor.getString(cursor.getColumnIndexOrThrow("PhotoName")).toLowerCase();
+                String temp = cursor.getString(cursor.getColumnIndexOrThrow("PhotoName"));
+
+                String type = cursor.getString(cursor.getColumnIndexOrThrow("ID"));
+
+                temp = temp.replace(".png", "");
+                types.add(type);
+
+                temp = temp.toLowerCase();
+
                 Log.e("temp", temp);
 
                 if(Character.isDigit(temp.charAt(0)))
@@ -199,7 +202,7 @@ public class HostelDetailsFragment extends Fragment implements View.OnClickListe
         List<Integer> arr = new ArrayList<>();
 
         for(String s:names) {
-            s = s.replace(".png", "");
+
             int t = getResourceId(s, "mipmap");
 
             arr.add(t);

@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView header;
 
     MainPagerAdapter adapter;
+    String roomType = "4 Bed Dorm";
 
     private Stack<Integer> stackkk = new Stack<>(); // Edited
     private int tabPosition = 0;
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if(v == booking) {
-
+            setPage(3);
         } else if(v == currency) {
             changeAlphaAll();
             v.setAlpha(0.5f);
@@ -124,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 rootLay.openDrawer(GravityCompat.END);
         } else if(v == menuBookings) {
             rootLay.closeDrawer(GravityCompat.END);
+            setPage(3);
         } else if(v == menuDeveloper) {
             rootLay.closeDrawer(GravityCompat.END);
         } else if(v == menuFeedback) {
@@ -205,11 +207,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             changeAlphaAll();
             home.setAlpha(0.5f);
 
+            header.setText("THE BLOCKS APP");
             back.setVisibility(View.GONE);
         } else if(position == 1) {
             changeAlphaAll();
             header.setText("ABOUT US");
 
+            back.setVisibility(View.VISIBLE);
+        } else if(position == 2) {
+            changeAlphaAll();
+            header.setText("ROOMS");
+            back.setVisibility(View.VISIBLE);
+        } else if(position == 3) {
+            changeAlphaAll();
+
+            booking.setAlpha(0.5f);
+            header.setText("THE BLOCKS APP");
             back.setVisibility(View.VISIBLE);
         }
     }
@@ -221,7 +234,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public class MainPagerAdapter extends FragmentStatePagerAdapter {
 
-        private int TOTAL_PAGES = 2;
+        private int TOTAL_PAGES = 4;
 
         public MainPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -240,6 +253,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 fragment = new HomeFragment();
             } else if(position == 1) {
                 fragment = new HostelDetailsFragment();
+            } else if(position == 2) {
+                fragment = new RoomFragment();
+
+                Bundle b = new Bundle();
+                b.putString("type", roomType);
+                fragment.setArguments(b);
+            } else if(position == 3) {
+                fragment = new BookingFragment();
             }
 
             return fragment;
@@ -274,6 +295,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void setPage(int position) {
 
+        mainPager.setCurrentItem(position);
+        tabPosition = position;
+
+        pushToStack();
+    }
+
+    public void setDetailsPage(int position, String type) {
+        roomType = type;
         mainPager.setCurrentItem(position);
         tabPosition = position;
 
