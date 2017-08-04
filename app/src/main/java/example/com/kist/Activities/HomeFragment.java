@@ -24,7 +24,7 @@ import example.com.kist.R;
  * Created by pr0 on 2/8/17.
  */
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     String DATABASE_PATH = "",
             DATABASE_NAME = "hostel.db";
@@ -45,6 +45,8 @@ public class HomeFragment extends Fragment {
         getAround = (CardView) v.findViewById(R.id.get_around);
         nexxt = (CardView) v.findViewById(R.id.next);
         noticeBoard = (CardView) v.findViewById(R.id.notice_board);
+
+        setOnclickListeners();
 
         return v;
     }
@@ -102,9 +104,33 @@ public class HomeFragment extends Fragment {
         List<Integer> arr = new ArrayList<>();
 
         for(String s:names) {
+            s.replace(".png", "");
             arr.add(getResourceId(s));
         }
 
         return arr;
+    }
+
+    private void setOnclickListeners() {
+        aboutHostel.setOnClickListener(this);
+        guide.setOnClickListener(this);
+        getAround.setOnClickListener(this);
+        nexxt.setOnClickListener(this);
+        noticeBoard.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == aboutHostel) {
+            ((MainActivity) getActivity()).setPage(1);
+        } else if(v == guide) {
+
+        } else if(v == getAround) {
+
+        } else if(v == nexxt) {
+
+        } else if(v == noticeBoard) {
+
+        }
     }
 }

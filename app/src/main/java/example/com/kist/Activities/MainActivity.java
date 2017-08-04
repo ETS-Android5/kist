@@ -114,16 +114,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             changeAlphaAll();
             v.setAlpha(0.5f);
         } else if(v == info) {
-            mainPager.setCurrentItem(1);
-            tabPosition = 1;
-
-            pushToStack();
         } else if(v == map) {
         } else if(home == v) {
-            mainPager.setCurrentItem(0);
-            tabPosition = 1;
-
-            pushToStack();
+            setPage(0);
         } else if(v == menu) {
             if(rootLay.isDrawerOpen(GravityCompat.END))
                 rootLay.closeDrawer(GravityCompat.END);
@@ -140,8 +133,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if(v == menuNotice) {
             rootLay.closeDrawer(GravityCompat.END);
         } else if(v == menuDetails) {
+            setPage(1);
             rootLay.closeDrawer(GravityCompat.END);
         } else if(v == menuHome) {
+            setPage(0);
             rootLay.closeDrawer(GravityCompat.END);
         } else if(v == menuGuide) {
             rootLay.closeDrawer(GravityCompat.END);
@@ -213,7 +208,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             back.setVisibility(View.GONE);
         } else if(position == 1) {
             changeAlphaAll();
-            info.setAlpha(0.5f);
             header.setText("ABOUT US");
 
             back.setVisibility(View.VISIBLE);
@@ -276,5 +270,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mainPager.setCurrentItem(stackkk.lastElement());
         } else
             super.onBackPressed();
+    }
+
+    public void setPage(int position) {
+
+        mainPager.setCurrentItem(position);
+        tabPosition = position;
+
+        pushToStack();
     }
 }

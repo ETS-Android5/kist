@@ -15,8 +15,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="220dp">
             </com.daimajia.slider.library.SliderLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#000"
+                android:layout_below="@id/image_pager"/>
             <LinearLayout
                 android:orientation="vertical"
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/image_pager">

@@ -6,19 +6,23 @@
     <com.daimajia.slider.library.SliderLayout
         android:id="@+id/image_pager"
         android:layout_width="match_parent"
-        android:layout_height="220dp">
+        android:layout_height="230dp">
     </com.daimajia.slider.library.SliderLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#000"
+        android:layout_below="@id/image_pager"/>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@id/image_pager">
+            android:layout_below="@id/image_pager"
+            android:layout_marginTop="20dp">
             <LinearLayout
-                android:paddingTop="20dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="20dp"
                 android:layout_width="match_parent"
+                android:paddingLeft="10dp"
+                android:paddingTop="20dp"
+                android:paddingRight="10dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_gravity="center"
@@ -53,7 +57,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="HOSTEL"
-                                android:textSize="20sp"
+                                android:textSize="18sp"
                                 android:textColor="#000"
                                 android:layout_gravity="center_horizontal"/>
                         </LinearLayout>
@@ -83,7 +87,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="GUIDE"
-                                android:textSize="20sp"
+                                android:textSize="18sp"
                                 android:textColor="#000"
                                 android:layout_gravity="center_horizontal"/>
                         </LinearLayout>
@@ -120,7 +124,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="AROUND"
-                                android:textSize="20sp"
+                                android:textSize="18sp"
                                 android:textColor="#000"
                                 android:layout_gravity="center_horizontal"/>
                         </LinearLayout>
@@ -151,7 +155,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="NEXT"
-                                android:textSize="20sp"
+                                android:textSize="18sp"
                                 android:textColor="#000"
                                 android:layout_gravity="center_horizontal"/>
                         </LinearLayout>
@@ -184,7 +188,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="BOARD"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:textColor="#000"
                             android:layout_gravity="center_horizontal"/>
                     </LinearLayout>

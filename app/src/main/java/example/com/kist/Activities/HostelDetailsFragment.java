@@ -164,7 +164,11 @@ public class HostelDetailsFragment extends Fragment implements View.OnClickListe
         List<Integer> arr = new ArrayList<>();
 
         for(String s:names) {
-            arr.add(getResourceId(s, "drawable"));
+            s = s.replace(".jpg", "");
+            int t = getResourceId(s, "drawable");
+
+            arr.add(t);
+            Log.e(s, t + "");
         }
 
         return arr;
@@ -195,7 +199,11 @@ public class HostelDetailsFragment extends Fragment implements View.OnClickListe
         List<Integer> arr = new ArrayList<>();
 
         for(String s:names) {
-            arr.add(getResourceId(s, "mipmap"));
+            s = s.replace(".png", "");
+            int t = getResourceId(s, "mipmap");
+
+            arr.add(t);
+            Log.e(s, t + "");
         }
 
         return arr;
