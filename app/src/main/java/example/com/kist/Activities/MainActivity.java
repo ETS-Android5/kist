@@ -8,6 +8,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,7 +25,7 @@ import example.com.kist.R;
  */
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
-        DrawerLayout.DrawerListener, ViewPager.OnPageChangeListener {
+        DrawerLayout.DrawerListener, example.com.kist.Constant.ViewPager.OnPageChangeListener {
     NonSwipingViewPager mainPager;
     RelativeLayout main;
 
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView header;
 
     MainPagerAdapter adapter;
-    String roomType = "4 Bed Dorm";
+    String roomType = "4 Bed Dorm", guideitemDetails = "", itemType = "FOOD", transportItemDetails = "";
 
     private Stack<Integer> stackkk = new Stack<>(); // Edited
     private int tabPosition = 0;
@@ -53,9 +54,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         changeAlphaAll();
 
         adapter = new MainPagerAdapter(getSupportFragmentManager());
+        mainPager.setOffscreenPageLimit(0);
         mainPager.setAdapter(adapter);
 
-        mainPager.addOnPageChangeListener(this);
+        mainPager.setOnPageChangeListener(this);
 
         home.setAlpha(0.5f);
     }
@@ -142,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             rootLay.closeDrawer(GravityCompat.END);
         } else if(v == menuGuide) {
             rootLay.closeDrawer(GravityCompat.END);
+            setPage(4);
         } else if(v == back) {
             if (stackkk.size() > 1) {
                 stackkk.pop();
@@ -224,6 +227,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             booking.setAlpha(0.5f);
             header.setText("THE BLOCKS APP");
             back.setVisibility(View.VISIBLE);
+        } else if(position == 4) {
+            changeAlphaAll();
+
+            header.setText("LOCAL GUIDE");
+            back.setVisibility(View.VISIBLE);
+        } else if(position == 5) {
+            changeAlphaAll();
+
+            header.setText("DIRECTIONS");
+            back.setVisibility(View.VISIBLE);
+        } else if(position == 6) {
+            changeAlphaAll();
+
+            header.setText(itemType);
+            back.setVisibility(View.VISIBLE);
+        } else if(position == 7) {
+            changeAlphaAll();
+            header.setText("Get Around");
+            back.setVisibility(View.VISIBLE);
+        } else if(position == 8) {
+            changeAlphaAll();
+
+            header.setText("Get Around");
+            back.setVisibility(View.VISIBLE);
         }
     }
 
@@ -234,7 +261,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public class MainPagerAdapter extends FragmentStatePagerAdapter {
 
-        private int TOTAL_PAGES = 4;
+        private int TOTAL_PAGES = 9;
 
         public MainPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -255,12 +282,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 fragment = new HostelDetailsFragment();
             } else if(position == 2) {
                 fragment = new RoomFragment();
-
                 Bundle b = new Bundle();
                 b.putString("type", roomType);
                 fragment.setArguments(b);
             } else if(position == 3) {
                 fragment = new BookingFragment();
+            } else if(position == 4) {
+                fragment = new LocalGuideFragment();
+            } else if(position == 5) {
+                fragment = new DirectionFragment();
+            } else if(position == 6) {
+                fragment = new LocalGuideItemDetailsFrag();
+                Bundle b = new Bundle();
+                b.putString("item", guideitemDetails);
+                fragment.setArguments(b);
+            } else if(position == 7) {
+                fragment = new TransportFragment();
+            } else if(position == 8) {
+                fragment = new TransportItemDetailsFragment();
+                Bundle b = new Bundle();
+                Log.e("item", transportItemDetails);
+                b.putString("item", transportItemDetails);
+                fragment.setArguments(b);
             }
 
             return fragment;
@@ -303,6 +346,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void setDetailsPage(int position, String type) {
         roomType = type;
+        mainPager.setCurrentItem(position);
+        tabPosition = position;
+
+        pushToStack();
+    }
+
+    public void setItemFrag(int position, String details, String type) {
+        guideitemDetails = details;
+        itemType = type;
+
+        mainPager.setCurrentItem(position);
+        tabPosition = position;
+
+        pushToStack();
+    }
+
+
+    public void setTransportItemFrag(int position, String details) {
+        transportItemDetails = details;
+
         mainPager.setCurrentItem(position);
         tabPosition = position;
 

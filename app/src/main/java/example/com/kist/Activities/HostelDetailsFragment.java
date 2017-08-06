@@ -173,7 +173,7 @@ public class HostelDetailsFragment extends Fragment implements View.OnClickListe
         List<String> names = new ArrayList<>();
 
         Cursor cursor = db.query("ThumbnailLookup", new String[]{"PhotoName", "ID"},
-                "Area = " + "\'" + "Beds" + "\'" , null, null, null, null);
+                "Area = " + "\"" + "Beds" + "\"" , null, null, null, null);
         if (cursor.moveToFirst()) {
             do {
                 String temp = cursor.getString(cursor.getColumnIndexOrThrow("PhotoName"));
@@ -271,7 +271,7 @@ public class HostelDetailsFragment extends Fragment implements View.OnClickListe
         } else if(v == callUs) {
             makeCall();
         } else if(v == directions) {
-
+            ((MainActivity) getActivity()).setPage(5);
         } else if(v == emailUs) {
             makeEmail();
         } else if(v == showMap) {

@@ -31,5 +31,7 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.slider:library:1.1.5@aar'
 
+    compile 'com.google.code.gson:gson:2.4'
+
     testCompile 'junit:junit:4.12'
 }
