@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">kist</string>
+    <string name="feedback_string">The Blocks Hostel would love to hear any feedback; positive or negative about us. All
+                your feedback will be utilised to help improve the services which The Blocks Hostel
+                                                        provides.</string>
+    <string name="dev_des1">Keep It Simple Travel (KIST) is a company combining the world of budget travel and
+technology together. Our aim is to create a vast network of budget travel information,
+then connect this information with people interested in budget travel through innovative
+technology.</string>
+    <string name="dev_des2">Here at Keep It Simple Travel we have developed a streamlined mobile application
+platform which we call the KIST App Platform. The platform has been specifically designed
+by our team to cater for backpacker hostels.</string>
+    <string name="dev_desc3">The team is a group of long term friends that are passionate about budget travel and
+technology. This passion is why we choose to specialize in hostel mobile app development.</string>
+    <string name="dev_desc4">"For more information or any questions please email us a Info@keepitsimpletravel.com</string>
 </resources>

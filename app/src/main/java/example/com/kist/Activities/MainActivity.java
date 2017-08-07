@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             changeAlphaAll();
             v.setAlpha(0.5f);
         } else if(v == info) {
+            setPage(11);
         } else if(v == map) {
         } else if(home == v) {
             setPage(0);
@@ -131,10 +132,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             setPage(3);
         } else if(v == menuDeveloper) {
             rootLay.closeDrawer(GravityCompat.END);
+            setPage(13);
         } else if(v == menuFeedback) {
             rootLay.closeDrawer(GravityCompat.END);
         } else if(v == menuContact) {
             rootLay.closeDrawer(GravityCompat.END);
+            setPage(12);
         } else if(v == menuNotice) {
             rootLay.closeDrawer(GravityCompat.END);
         } else if(v == menuDetails) {
@@ -263,7 +266,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             header.setText("Where To Next");
             back.setVisibility(View.VISIBLE);
+        } else if(position == 11) {
+            changeAlphaAll();
 
+            info.setAlpha(0.5f);
+
+            header.setText("Travel Tips");
+            back.setVisibility(View.VISIBLE);
+        } else if(position == 12) {
+            changeAlphaAll();
+
+            header.setText("About Us");
+            back.setVisibility(View.VISIBLE);
+        } else if(position == 13) {
+            changeAlphaAll();
+
+            header.setText("Developer");
+            back.setVisibility(View.VISIBLE);
         }
     }
 
@@ -274,7 +293,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public class MainPagerAdapter extends FragmentStatePagerAdapter {
 
-        private int TOTAL_PAGES = 10;
+        private int TOTAL_PAGES = 14;
 
         public MainPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -324,6 +343,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 b.putString("item", nextItemDetails);
                 fragment.setArguments(b);
+            } else if(position == 11) {
+                fragment = new TravelTipFragment();
+            } else if(position == 12) {
+                fragment = new AboutUsFragment();
+            } else if(position == 13) {
+                fragment = new DeveloperFragment();
             }
 
             return fragment;

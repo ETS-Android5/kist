@@ -1,6 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-</LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/image_pager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@mipmap/header">
+            </ImageView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#000"
+                android:layout_below="@id/image_pager"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:padding="25dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/image_pager">
+                <TextView
+                    android:id="@+id/first"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:text="Select Currency"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:textStyle="bold"
+                    android:background="@drawable/stroke_fill_rect"/>
+                <EditText
+                    android:id="@+id/first_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:layout_marginTop="30dp"
+                    android:imeOptions="actionDone"
+                    android:hint="Enter Amount"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:textColor="#000"
+                    android:background="@drawable/stroke_fill_round_rect"/>
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:src="@mipmap/convert_button"/>
+                <EditText
+                    android:id="@+id/sec_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:lines="1"
+                    android:imeOptions="actionDone"
+                    android:hint="Enter Amount"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:textColor="#000"
+                    android:background="@drawable/stroke_fill_round_rect"/>
+                <TextView
+                    android:id="@+id/sec"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:layout_marginTop="30dp"
+                    android:text="Select Currency"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:textStyle="bold"
+                    android:background="@drawable/stroke_fill_rect"/>
+            </LinearLayout>
+        </RelativeLayout>
+</RelativeLayout>
