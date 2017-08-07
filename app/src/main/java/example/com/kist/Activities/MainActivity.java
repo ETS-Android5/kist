@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView header;
 
     MainPagerAdapter adapter;
-    String roomType = "4 Bed Dorm", guideitemDetails = "", itemType = "FOOD", transportItemDetails = "";
+    String roomType = "4 Bed Dorm", guideitemDetails = "", itemType = "FOOD",
+            transportItemDetails = "", nextItemDetails = "";
 
     private Stack<Integer> stackkk = new Stack<>(); // Edited
     private int tabPosition = 0;
@@ -251,6 +252,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             header.setText("Get Around");
             back.setVisibility(View.VISIBLE);
+        } else if(position == 9) {
+            changeAlphaAll();
+
+            header.setText("Where To Next");
+            back.setVisibility(View.VISIBLE);
+
+        } else if(position == 10) {
+            changeAlphaAll();
+
+            header.setText("Where To Next");
+            back.setVisibility(View.VISIBLE);
+
         }
     }
 
@@ -261,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public class MainPagerAdapter extends FragmentStatePagerAdapter {
 
-        private int TOTAL_PAGES = 9;
+        private int TOTAL_PAGES = 10;
 
         public MainPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -271,7 +284,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public int getCount() {
             return TOTAL_PAGES;
         }
-
         @Override
         public Fragment getItem(int position) {
             Fragment fragment = new Fragment();
@@ -301,8 +313,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else if(position == 8) {
                 fragment = new TransportItemDetailsFragment();
                 Bundle b = new Bundle();
-                Log.e("item", transportItemDetails);
+
                 b.putString("item", transportItemDetails);
+                fragment.setArguments(b);
+            } else if(position == 9) {
+                fragment = new NextFragment();
+            } else if(position == 10) {
+                fragment = new NextItemDetailsFragment();
+                Bundle b = new Bundle();
+
+                b.putString("item", nextItemDetails);
                 fragment.setArguments(b);
             }
 
@@ -365,6 +385,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void setTransportItemFrag(int position, String details) {
         transportItemDetails = details;
+
+        mainPager.setCurrentItem(position);
+        tabPosition = position;
+
+        pushToStack();
+    }
+
+    public void setNextItemFrag(int position, String details) {
+        nextItemDetails = details;
 
         mainPager.setCurrentItem(position);
         tabPosition = position;

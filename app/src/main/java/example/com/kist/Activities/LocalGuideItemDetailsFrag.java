@@ -127,7 +127,7 @@ public class LocalGuideItemDetailsFrag extends Fragment implements View.OnClickL
 
             for (String s : names) {
                 s = s.toLowerCase();
-                s.replace(".jpg", "");
+                s = s.replace(".jpg", "");
                 arr.add(getResourceId(s));
             }
 

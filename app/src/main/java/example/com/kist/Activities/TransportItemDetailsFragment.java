@@ -139,7 +139,7 @@ public class TransportItemDetailsFragment extends Fragment implements View.OnCli
 
         for(String s:names) {
             s = s.toLowerCase();
-            s.replace(".jpg", "");
+            s = s.replace(".jpg", "");
             arr.add(getResourceId(s));
         }
 

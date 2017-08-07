@@ -4,49 +4,56 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.TextView;
+
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
+import example.com.kist.Objects.NextItem;
+
 import example.com.kist.R;
 
 /**
- * Created by pr0 on 2/8/17.
+ * Created by pr0 on 6/8/17.
  */
 
-public class HomeFragment extends Fragment implements View.OnClickListener {
-
-    String DATABASE_PATH = "",
-            DATABASE_NAME = "hostel.db";
+public class NextItemDetailsFragment extends Fragment {
 
     SliderLayout slidingImages;
-    CardView aboutHostel, guide, getAround, nexxt, noticeBoard;
-
+    String DATABASE_PATH = "",
+            DATABASE_NAME = "hostel.db";
     SQLiteDatabase db;
+
+    TextView title, des, there1, there2, there3;
+
+    NextItem item;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle SavedInstanceState) {
 
-        View v = inflater.inflate(R.layout.main_fragment, viewGroup, false);
+        View v = inflater.inflate(R.layout.next_item_detials_frag, viewGroup, false);
+
         slidingImages = (SliderLayout) v.findViewById(R.id.image_pager);
+        title = (TextView) v.findViewById(R.id.title);
 
-        aboutHostel = (CardView) v.findViewById(R.id.about_hostel);
-        guide = (CardView) v.findViewById(R.id.guide);
-        getAround = (CardView) v.findViewById(R.id.get_around);
-        nexxt = (CardView) v.findViewById(R.id.next);
-        noticeBoard = (CardView) v.findViewById(R.id.notice_board);
-
-        setOnclickListeners();
+        des = (TextView) v.findViewById(R.id.desc);
+        there1 = (TextView) v.findViewById(R.id.there1);
+        there2 = (TextView) v.findViewById(R.id.there2);
+        there3 = (TextView) v.findViewById(R.id.there3);
 
         return v;
     }
@@ -54,6 +61,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(Bundle onSavedInstanceState) {
         super.onActivityCreated(onSavedInstanceState);
+
+        item = new Gson().fromJson(getArguments().getString("item", ""), NextItem.class);
 
         try {
             DATABASE_PATH = getActivity().getPackageManager().
@@ -63,8 +72,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             List<Integer> res = queryForImages();
 
-            if(res != null && res.size() != 0) {
-                for(int i =0; i < res.size(); ++i) {
+            if (res != null && res.size() != 0) {
+                for (int i = 0; i < res.size(); ++i) {
                     DefaultSliderView sliderView = new DefaultSliderView(getActivity());
                     sliderView.image(res.get(i)).setScaleType(BaseSliderView.ScaleType.Fit);
 
@@ -74,6 +83,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             slidingImages.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
             slidingImages.stopAutoCycle();
+
+            title.setText(item.getName());
+
+            des.setText(item.getDescription());
+            there1.setText(item.getGetting1());
+            there2.setText(item.getGettng2());
+            there3.setText(item.getGetting3());
+
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -81,7 +98,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     public int getResourceId(String name) {
         Resources resources = getActivity().getResources();
-        final int resourceId = resources.getIdentifier(name, "mipmap",
+        final int resourceId = resources.getIdentifier(name, "drawable",
                 getActivity().getPackageName());
         return resourceId;
     }
@@ -90,7 +107,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         List<String> names = new ArrayList<>();
 
         Cursor cursor = db.query("PhotoLookup", new String[]{"PhotoName"},
-                "Area = " + "\'" + "Home" + "\'" , null, null, null, null);
+                "Area = " + "\"" + "Next" + "\"" + " AND " + "ID = " + "\"" + item.getName() + "\""
+                , null, null, null, null);
         if (cursor.moveToFirst()) {
             do {
                 names.add(cursor.getString(cursor.getColumnIndexOrThrow("PhotoName")));
@@ -104,33 +122,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         List<Integer> arr = new ArrayList<>();
 
         for(String s:names) {
-            s.replace(".png", "");
+            s = s.toLowerCase();
+            s = s.replace(".jpg", "");
+
             arr.add(getResourceId(s));
         }
 
         return arr;
-    }
-
-    private void setOnclickListeners() {
-        aboutHostel.setOnClickListener(this);
-        guide.setOnClickListener(this);
-        getAround.setOnClickListener(this);
-        nexxt.setOnClickListener(this);
-        noticeBoard.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        if(v == aboutHostel) {
-            ((MainActivity) getActivity()).setPage(1);
-        } else if(v == guide) {
-            ((MainActivity) getActivity()).setPage(4);
-        } else if(v == getAround) {
-            ((MainActivity) getActivity()).setPage(7);
-        } else if(v == nexxt) {
-            ((MainActivity) getActivity()).setPage(9);
-        } else if(v == noticeBoard) {
-
-        }
     }
 }
