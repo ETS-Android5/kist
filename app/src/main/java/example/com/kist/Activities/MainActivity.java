@@ -115,8 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(v == booking) {
             setPage(3);
         } else if(v == currency) {
-            changeAlphaAll();
-            v.setAlpha(0.5f);
+            setPage(15);
         } else if(v == info) {
             setPage(11);
         } else if(v == map) {
@@ -135,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             setPage(13);
         } else if(v == menuFeedback) {
             rootLay.closeDrawer(GravityCompat.END);
+            setPage(14);
         } else if(v == menuContact) {
             rootLay.closeDrawer(GravityCompat.END);
             setPage(12);
@@ -283,6 +283,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             header.setText("Developer");
             back.setVisibility(View.VISIBLE);
+        } else if(position == 14) {
+            changeAlphaAll();
+
+            header.setText("Feedback");
+            back.setVisibility(View.VISIBLE);
+        } else if(position == 15) {
+            changeAlphaAll();
+            currency.setAlpha(0.5f);
+
+            header.setText("Currency Converter");
+            back.setVisibility(View.VISIBLE);
         }
     }
 
@@ -293,7 +304,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public class MainPagerAdapter extends FragmentStatePagerAdapter {
 
-        private int TOTAL_PAGES = 14;
+        private int TOTAL_PAGES = 16;
 
         public MainPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -349,6 +360,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 fragment = new AboutUsFragment();
             } else if(position == 13) {
                 fragment = new DeveloperFragment();
+            } else if(position == 14) {
+                fragment = new FeedbackFragment();
+            } else if(position == 15) {
+                fragment = new CurrencyConverterFragment();
             }
 
             return fragment;

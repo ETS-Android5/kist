@@ -2,6 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -19,8 +22,9 @@
                 android:layout_below="@id/image_pager"/>
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_marginTop="10dp"
-                android:padding="25dp"
+                android:layout_marginTop="15dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -39,10 +43,11 @@
                     android:id="@+id/first_amount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:layout_marginTop="30dp"
+                    android:padding="10dp"
+                    android:layout_marginTop="20dp"
                     android:imeOptions="actionDone"
                     android:hint="Enter Amount"
+                    android:inputType="text"
                     android:gravity="center"
                     android:lines="1"
                     android:textColor="#000"
@@ -57,9 +62,10 @@
                     android:id="@+id/sec_amount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="12dp"
+                    android:padding="10dp"
                     android:lines="1"
                     android:imeOptions="actionDone"
+                    android:inputType="text"
                     android:hint="Enter Amount"
                     android:gravity="center"
                     android:layout_marginTop="20dp"
@@ -78,4 +84,5 @@
                     android:background="@drawable/stroke_fill_rect"/>
             </LinearLayout>
         </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

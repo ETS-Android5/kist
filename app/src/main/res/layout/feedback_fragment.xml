@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="25dp">
     <TextView
         android:id="@+id/feed_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/feedback_string"
         android:textSize="15sp"
-        android:textStyle="bold"
-        android:padding="25dp"/>
-
+        android:textStyle="bold"/>
+    <ImageView
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/submitfeedbackbutton"
+        android:layout_alignParentBottom="true"/>
+    <EditText
+        android:id="@+id/feedback"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/submit"
+        android:layout_below="@id/feed_text"
+        android:hint="Enter Feedback"
+        android:gravity="top"
+        android:padding="10dp"
+        android:background="@drawable/round_stroke_rect"
+        android:layout_margin="20dp"/>
 </RelativeLayout>
