@@ -3,6 +3,7 @@ package example.com.kist.Activities;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -177,6 +178,7 @@ public class CurrencyConverterFragment extends Fragment {
         final Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.currency_list);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         ListView listView = (ListView) dialog.findViewById(R.id.list);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),

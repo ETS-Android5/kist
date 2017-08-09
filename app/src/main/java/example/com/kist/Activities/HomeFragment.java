@@ -130,7 +130,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         } else if(v == nexxt) {
             ((MainActivity) getActivity()).setPage(9);
         } else if(v == noticeBoard) {
-
+            ((MainActivity) getActivity()).setPage(16);
         }
     }
 }

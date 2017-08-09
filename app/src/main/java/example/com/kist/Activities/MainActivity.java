@@ -29,9 +29,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     NonSwipingViewPager mainPager;
     RelativeLayout main;
 
-    ImageView booking, currency, info, map, home, menu;                                             //all toolbar options
+    ImageView booking, currency, info, map, home, menu, login;                                             //all toolbar options
     LinearLayout menuHome, menuDetails, menuGuide, menuBookings,
-            menuNotice, menuContact, menuFeedback, menuDeveloper, back;
+            menuNotice, menuContact, menuFeedback, menuDeveloper, back, bottomLayHome;
+    RelativeLayout bottomLayNotice;
+
     DrawerLayout rootLay;
 
     TextView header;
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         map = (ImageView) findViewById(R.id.map);
         home = (ImageView) findViewById(R.id.home);
         menu = (ImageView) findViewById(R.id.menu);
+        login = (ImageView) findViewById(R.id.login);
 
         menuHome = (LinearLayout) findViewById(R.id.menu_home);
         menuDetails = (LinearLayout) findViewById(R.id.menu_details);
@@ -81,6 +84,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menuContact = (LinearLayout) findViewById(R.id.menu_contact);
         menuFeedback = (LinearLayout) findViewById(R.id.menu_feedback);
         menuDeveloper = (LinearLayout) findViewById(R.id.menu_developer);
+        bottomLayHome = (LinearLayout) findViewById(R.id.home_lay);
+
+        bottomLayNotice = (RelativeLayout) findViewById(R.id.message_post_lay);
 
         main = (RelativeLayout) findViewById(R.id.main);
         header = (TextView) findViewById(R.id.headerName);
@@ -140,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             setPage(12);
         } else if(v == menuNotice) {
             rootLay.closeDrawer(GravityCompat.END);
+            setPage(16);
         } else if(v == menuDetails) {
             setPage(1);
             rootLay.closeDrawer(GravityCompat.END);
@@ -165,6 +172,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         info.setAlpha(1f);
         map.setAlpha(1f);
         home.setAlpha(1f);
+
+        menu.setVisibility(View.VISIBLE);
+        login.setVisibility(View.GONE);
+
+        bottomLayNotice.setVisibility(View.GONE);
+        bottomLayHome.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -294,6 +307,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             header.setText("Currency Converter");
             back.setVisibility(View.VISIBLE);
+        } else if(position == 16) {
+            changeAlphaAll();
+
+            menu.setVisibility(View.GONE);
+            login.setVisibility(View.VISIBLE);
+
+            header.setText("Notifications");
+            back.setVisibility(View.VISIBLE);
         }
     }
 
@@ -304,7 +325,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public class MainPagerAdapter extends FragmentStatePagerAdapter {
 
-        private int TOTAL_PAGES = 16;
+        private int TOTAL_PAGES = 17;
 
         public MainPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -364,6 +385,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 fragment = new FeedbackFragment();
             } else if(position == 15) {
                 fragment = new CurrencyConverterFragment();
+            } else if(position == 16) {
+                fragment = new NotificationFrament();
             }
 
             return fragment;
