@@ -114,6 +114,38 @@
                     android:layout_height="25dp"
                     android:src="@mipmap/toolbar_home"/>
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/map_lay"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:weightSum="4">
+                <ImageView
+                    android:id="@+id/food_map"
+                    android:layout_weight="1"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@mipmap/mapeats"/>
+                <ImageView
+                    android:id="@+id/drinks_map"
+                    android:layout_weight="1"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@mipmap/mapdrink"/>
+                <ImageView
+                    android:id="@+id/attraction_map"
+                    android:layout_weight="1"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@mipmap/mapattractions"/>
+                <ImageView
+                    android:id="@+id/hostel_map"
+                    android:layout_weight="1"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@mipmap/maphostelicon"/>
+            </LinearLayout>
             <RelativeLayout
                 android:id="@+id/message_post_lay"
                 android:layout_width="match_parent"

@@ -1,6 +1,10 @@
 package example.com.kist.Activities;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -14,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Stack;
 
@@ -31,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     ImageView booking, currency, info, map, home, menu, login;                                             //all toolbar options
     LinearLayout menuHome, menuDetails, menuGuide, menuBookings,
-            menuNotice, menuContact, menuFeedback, menuDeveloper, back, bottomLayHome;
+            menuNotice, menuContact, menuFeedback, menuDeveloper, back, bottomLayHome, bottomLayMap;
     RelativeLayout bottomLayNotice;
 
     DrawerLayout rootLay;
@@ -44,6 +49,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Stack<Integer> stackkk = new Stack<>(); // Edited
     private int tabPosition = 0;
+
+    String mapName = "", mapType = "";
+    Double mapLat = 0.0, mapLong = 0.0;
+
+    boolean mapSingle;
+    boolean mapDirection;
 
     @Override
     protected void onCreate(Bundle onSavedInstanceState) {
@@ -85,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menuFeedback = (LinearLayout) findViewById(R.id.menu_feedback);
         menuDeveloper = (LinearLayout) findViewById(R.id.menu_developer);
         bottomLayHome = (LinearLayout) findViewById(R.id.home_lay);
+        bottomLayMap = (LinearLayout) findViewById(R.id.map_lay);
 
         bottomLayNotice = (RelativeLayout) findViewById(R.id.message_post_lay);
 
@@ -125,6 +137,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if(v == info) {
             setPage(11);
         } else if(v == map) {
+
+            if(checkMap()) {
+                mapSingle = false;
+                mapDirection = false;
+
+                setPage(17);
+            }
         } else if(home == v) {
             setPage(0);
         } else if(v == menu) {
@@ -178,6 +197,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         bottomLayNotice.setVisibility(View.GONE);
         bottomLayHome.setVisibility(View.VISIBLE);
+        bottomLayMap.setVisibility(View.GONE);
     }
 
     @Override
@@ -315,6 +335,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             header.setText("Notifications");
             back.setVisibility(View.VISIBLE);
+        } else if(position == 17) {
+            changeAlphaAll();
+
+            header.setText("MAP");
+            back.setVisibility(View.VISIBLE);
+            bottomLayMap.setVisibility(View.VISIBLE);
+            bottomLayHome.setVisibility(View.GONE);
         }
     }
 
@@ -325,7 +352,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public class MainPagerAdapter extends FragmentStatePagerAdapter {
 
-        private int TOTAL_PAGES = 17;
+        private int TOTAL_PAGES = 18;
 
         public MainPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -387,6 +414,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 fragment = new CurrencyConverterFragment();
             } else if(position == 16) {
                 fragment = new NotificationFrament();
+            } else if(position == 17) {
+                fragment = new MapFragment();
+                Bundle b = new Bundle();
+
+                b.putString("name", mapName);
+                b.putString("type", mapType);
+                b.putDouble("lat", mapLat);
+                b.putDouble("long", mapLong);
+
+                b.putBoolean("single", mapSingle);
+                b.putBoolean("directions", mapDirection);
+                fragment.setArguments(b);
             }
 
             return fragment;
@@ -462,5 +501,65 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tabPosition = position;
 
         pushToStack();
+    }
+
+    public void setMapdetails(boolean single, boolean directions, String name,
+                              String type, Double longitude, Double latitude) {
+        mapSingle = single;
+        mapName = name;
+        mapType = type;
+        mapLat = latitude;
+        mapLong = longitude;
+        mapDirection = directions;
+
+        setPage(17);
+    }
+
+    public static boolean checkPermission(final Context context) {
+        return ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void showPermissionDialog() {
+        ActivityCompat.requestPermissions(
+                this,
+                new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},
+                2);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 2: {
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(MainActivity.this, "Permission denied to get your location.", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
+    public boolean checkMap() {
+        if(!checkPermission(this)) {
+            showPermissionDialog();
+            return false;
+        }
+
+        return true;
     }
 }

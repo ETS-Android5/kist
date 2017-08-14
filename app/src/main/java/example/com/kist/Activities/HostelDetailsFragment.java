@@ -275,7 +275,9 @@ public class HostelDetailsFragment extends Fragment implements View.OnClickListe
         } else if(v == emailUs) {
             makeEmail();
         } else if(v == showMap) {
-
+            if(((MainActivity) getActivity()).checkMap())
+                ((MainActivity) getActivity()).setMapdetails(true, false, name, "HostelDetails",
+                    Double.parseDouble(longt), Double.parseDouble(lat));
         } else if(v == contact) {
 
         } else if(v == fb) {

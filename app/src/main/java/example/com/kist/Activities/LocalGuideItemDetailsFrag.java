@@ -180,6 +180,7 @@ public class LocalGuideItemDetailsFrag extends Fragment implements View.OnClickL
         AboutFragment fragment = new AboutFragment();
         Bundle b = new Bundle();
         b.putString("title", item.getName());
+        b.putString("type", item.getType());
         if(item.getDes1() != null)
             b.putString("desc1", item.getDes1());
 

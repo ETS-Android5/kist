@@ -49,8 +49,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import example.com.kist.Constant.ImageAdapter;
 import example.com.kist.Constant.NotificationAdapter;
@@ -86,7 +90,7 @@ public class NotificationFrament extends Fragment {
 
     String requestURL = "http://kistchatstorage.com/HostelBlocksDB/" +
             "getNB.php?%20userID=0&senderID=%@&key=5a14ec5b310164f2dfe49e86b06124a";
-    String base = "http://kistchatstorage.com/HostelBlocksDB/sendMsg.php";
+    String base = "http://kistchatstorage.com/HostelBlocksDB/sendNB.php";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle SavedInstanceState) {
@@ -124,10 +128,10 @@ public class NotificationFrament extends Fragment {
             @Override
             public void onClick(View view) {
                 if(selectedImage) {
-                    postMessage(1, 2, msg.getText().toString(), "Image");
+                    postMessage("0", "", msg.getText().toString(), "Image");
                 } else {
                     if(!msg.getText().toString().isEmpty())
-                        postMessage(1, 2, msg.getText().toString(), "Message");
+                        postMessage("0", "", msg.getText().toString(), "Message");
                     else
                         Toast.makeText(getActivity(), "Please select an Image or a Message to post.", Toast.LENGTH_SHORT).show();
                 }
@@ -261,7 +265,7 @@ public class NotificationFrament extends Fragment {
             return false;
     }
 
-    private void postMessage(final int userId, final int senderId,
+    private void postMessage(final String userId, final String senderId,
                              final String msg, final String type) {
 
         gallery.setEnabled(false);
@@ -273,15 +277,34 @@ public class NotificationFrament extends Fragment {
             protected Void doInBackground(Void... voids) {
                 try {
 
-                    base += "?userId=" + userId + "&senderId=" + senderId + "&msg=" + msg +
-                            "&image=" + encodedImage + "&type=" + type + "&key=" + KEY;
+                    Log.e("user, sender, msg, type", userId + senderId + msg + type);
 
+                    HashMap<String, String> jsonObject = new LinkedHashMap<String, String>();
+
+                    jsonObject.put("userID", userId);
+                    jsonObject.put("senderID", senderId);
+                    jsonObject.put("msg", msg);
+
+                    if(!encodedImage.isEmpty())
+                        jsonObject.put("image", encodedImage);
+
+                    jsonObject.put("type", type);
+                    jsonObject.put("key", KEY);
 
                     URL url = new URL(base);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setDoOutput(true);
                     connection.setDoInput(true);
                     connection.setRequestMethod("POST");
+
+                    OutputStream out = new BufferedOutputStream(connection.getOutputStream());
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
+                    writer.write(getPostDataString(jsonObject));
+
+                    writer.flush();
+                    writer.close();
+                    out.close();
+
                     connection.connect();
 
                     InputStream in = new BufferedInputStream(connection.getInputStream());
@@ -321,5 +344,22 @@ public class NotificationFrament extends Fragment {
             }
 
         }.execute();
+    }
+
+    private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException{
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+        for(Map.Entry<String, String> entry : params.entrySet()){
+            if (first)
+                first = false;
+            else
+                result.append("&");
+
+            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+        }
+
+        return result.toString();
     }
 }

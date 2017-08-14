@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +17,8 @@ import example.com.kist.R;
  */
 
 public class AboutFragment extends Fragment implements View.OnClickListener {
-    String closestStop, openingHrs, gettingThere, longt, lat, fbUrl, instaUrl, taUrl, title, desc1, desc2, desc3;
+    String closestStop, openingHrs, gettingThere, longt,
+            lat, fbUrl, instaUrl, taUrl, title, desc1, desc2, desc3, type;
 
     TextView titleV, desc1V, desc2V, desc3V, closestH, closestC,
             getThereH, getThereC, openHrsV;
@@ -40,6 +41,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
 
         if(getArguments() != null) {
             title = getArguments().getString("title", "");
+            type = getArguments().getString("type", "");
             desc1 = getArguments().getString("desc1", "");
             desc2 = getArguments().getString("desc2", "");
             desc3 = getArguments().getString("desc3", "");
@@ -121,7 +123,9 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if(view == showMap) {
-
+            if(((MainActivity) getActivity()).checkMap())
+                ((MainActivity) getActivity()).setMapdetails(true, false, title, type,
+                       Double.parseDouble(longt), Double.parseDouble(lat));
         } else if(view == fb) {
             openWebView(fbUrl);
         } else if(view == insta) {
