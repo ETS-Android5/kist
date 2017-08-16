@@ -267,7 +267,7 @@ public class HostelDetailsFragment extends Fragment implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if(v == bookBed) {
-
+            ((MainActivity) getActivity()).setPage(3);
         } else if(v == callUs) {
             makeCall();
         } else if(v == directions) {
@@ -279,7 +279,7 @@ public class HostelDetailsFragment extends Fragment implements View.OnClickListe
                 ((MainActivity) getActivity()).setMapdetails(true, false, name, "HostelDetails",
                     Double.parseDouble(longt), Double.parseDouble(lat));
         } else if(v == contact) {
-
+            ((MainActivity) getActivity()).setPage(12);
         } else if(v == fb) {
             openWebView(fbUrl);
         } else if(v == insta) {
@@ -314,7 +314,7 @@ public class HostelDetailsFragment extends Fragment implements View.OnClickListe
 
                 // Set the TextView text font family and text size
                 tv.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
-                tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
                 // Set the TextView text (GridView item text)
                 tv.setText(facilities.get(position));

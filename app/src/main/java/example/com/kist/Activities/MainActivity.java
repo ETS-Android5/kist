@@ -582,5 +582,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void setUrl(String url) {
         this.url = url;
+        setPage(18);
     }
 }
