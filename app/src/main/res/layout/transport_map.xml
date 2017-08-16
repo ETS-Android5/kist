@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#000">
+    android:layout_height="match_parent">
     <RelativeLayout
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
@@ -23,21 +22,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Back"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textColor="#1468a7"/>
         </LinearLayout>
         <TextView
-            android:id="@+id/heading"
+            android:id="@+id/headerName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NOTICEBOARD"
             android:layout_centerInParent="true"
-            android:textSize="16sp"
+            android:text="THE BLOCKS APP"
+            android:textStyle="bold"
             android:textColor="#000"
-            android:typeface="serif"/>
+            android:textSize="18sp"/>
     </RelativeLayout>
     <com.github.chrisbanes.photoview.PhotoView
-        android:id="@+id/photo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@drawable/bangkok_public_transport_map"/>
 </LinearLayout>

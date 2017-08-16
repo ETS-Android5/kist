@@ -387,8 +387,6 @@ public class HostelDetailsFragment extends Fragment implements View.OnClickListe
     }
 
     private void openWebView(String url) {
-        Intent i = new Intent(getActivity(), WebViewActivity.class);
-        i.putExtra("url", url);
-        startActivity(i);
+        ((MainActivity) getActivity()).setUrl(url);
     }
 }

@@ -95,6 +95,8 @@ public class LocalGuideFragment extends Fragment implements View.OnClickListener
         Resources resources = getActivity().getResources();
         final int resourceId = resources.getIdentifier(name, from,
                 getActivity().getPackageName());
+
+        Log.e(name, resourceId+"");
         return resourceId;
     }
 
@@ -128,6 +130,7 @@ public class LocalGuideFragment extends Fragment implements View.OnClickListener
 
                 item.setResourceId(queryForImage(table, item.getName()));
 
+                Log.e("resource", item.getName() + ":" + item.getResourceId());
                 item.setType(table);
 
                 if(table.contains("Drink"))
@@ -167,7 +170,9 @@ public class LocalGuideFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View view) {
         if(view == eats) {
-            eats.setBackgroundColor(Color.parseColor("#8b8e8e"));
+            eats.setBackgroundColor(Color.parseColor("#000000"));
+            eats.setTextColor(Color.parseColor("ffffff"));
+
             drinks.setBackgroundResource(R.drawable.stroke_rect);
             attr.setBackgroundResource(R.drawable.stroke_rect);
 
@@ -175,7 +180,9 @@ public class LocalGuideFragment extends Fragment implements View.OnClickListener
             guideList.setAdapter(adapter);
             setListViewHeightBasedOnChildren(guideList);
         } else if(view == drinks) {
-            drinks.setBackgroundColor(Color.parseColor("#8b8e8e"));
+            drinks.setBackgroundColor(Color.parseColor("#000000"));
+            drinks.setTextColor(Color.parseColor("#ffffff"));
+
             eats.setBackgroundResource(R.drawable.stroke_rect);
             attr.setBackgroundResource(R.drawable.stroke_rect);
             adapter = new LocalGuideListAdapter(getActivity(), drinksList);
@@ -183,7 +190,9 @@ public class LocalGuideFragment extends Fragment implements View.OnClickListener
 
             setListViewHeightBasedOnChildren(guideList);
         } else if(view == attr) {
-            attr.setBackgroundColor(Color.parseColor("#8b8e8e"));
+            attr.setBackgroundColor(Color.parseColor("#000000"));
+            attr.setTextColor(Color.parseColor("#ffffff"));
+
             drinks.setBackgroundResource(R.drawable.stroke_rect);
             eats.setBackgroundResource(R.drawable.stroke_rect);
             adapter = new LocalGuideListAdapter(getActivity(), attrItems);

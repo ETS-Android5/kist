@@ -3,6 +3,7 @@ package example.com.kist.Activities;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean mapSingle;
     boolean mapDirection;
 
+    String url = "";
+
     @Override
     protected void onCreate(Bundle onSavedInstanceState) {
         super.onCreate(onSavedInstanceState);
@@ -102,6 +105,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         main = (RelativeLayout) findViewById(R.id.main);
         header = (TextView) findViewById(R.id.headerName);
+
+        header.setTypeface(Typeface.SERIF);
 
         back = (LinearLayout) findViewById(R.id.back);
 
@@ -281,51 +286,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             back.setVisibility(View.VISIBLE);
         } else if(position == 7) {
             changeAlphaAll();
-            header.setText("Get Around");
+            header.setText("GET AROUND");
             back.setVisibility(View.VISIBLE);
         } else if(position == 8) {
             changeAlphaAll();
 
-            header.setText("Get Around");
+            header.setText("GET AROUND");
             back.setVisibility(View.VISIBLE);
         } else if(position == 9) {
             changeAlphaAll();
 
-            header.setText("Where To Next");
+            header.setText("WHERE TO NEXT");
             back.setVisibility(View.VISIBLE);
 
         } else if(position == 10) {
             changeAlphaAll();
 
-            header.setText("Where To Next");
+            header.setText("WHERE TO NEXT");
             back.setVisibility(View.VISIBLE);
         } else if(position == 11) {
             changeAlphaAll();
 
             info.setAlpha(0.5f);
 
-            header.setText("Travel Tips");
+            header.setText("TRAVEL TIPS");
             back.setVisibility(View.VISIBLE);
         } else if(position == 12) {
             changeAlphaAll();
 
-            header.setText("About Us");
+            header.setText("ABOUT US");
             back.setVisibility(View.VISIBLE);
         } else if(position == 13) {
             changeAlphaAll();
 
-            header.setText("Developer");
+            header.setText("DEVELOPER");
             back.setVisibility(View.VISIBLE);
         } else if(position == 14) {
             changeAlphaAll();
 
-            header.setText("Feedback");
+            header.setText("FEEDBACK");
             back.setVisibility(View.VISIBLE);
         } else if(position == 15) {
             changeAlphaAll();
             currency.setAlpha(0.5f);
 
-            header.setText("Currency Converter");
+            header.setText("CURRENCY CONVERTER");
             back.setVisibility(View.VISIBLE);
         } else if(position == 16) {
             changeAlphaAll();
@@ -333,7 +338,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             menu.setVisibility(View.GONE);
             login.setVisibility(View.VISIBLE);
 
-            header.setText("Notifications");
+            header.setText("NOTIFICATIONS");
             back.setVisibility(View.VISIBLE);
         } else if(position == 17) {
             changeAlphaAll();
@@ -342,6 +347,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             back.setVisibility(View.VISIBLE);
             bottomLayMap.setVisibility(View.VISIBLE);
             bottomLayHome.setVisibility(View.GONE);
+        } else if(position == 18) {
+            changeAlphaAll();
+            currency.setAlpha(0.5f);
+
+            header.setText("THE BLOCKS APP");
+            back.setVisibility(View.VISIBLE);
         }
     }
 
@@ -352,7 +363,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public class MainPagerAdapter extends FragmentStatePagerAdapter {
 
-        private int TOTAL_PAGES = 18;
+        private int TOTAL_PAGES = 19;
 
         public MainPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -425,6 +436,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 b.putBoolean("single", mapSingle);
                 b.putBoolean("directions", mapDirection);
+                fragment.setArguments(b);
+            } else if(position == 18) {
+                Bundle b = new Bundle();
+                b.putString("url", url);
+
+                fragment = new WebViewFragment();
                 fragment.setArguments(b);
             }
 
@@ -561,5 +578,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         return true;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

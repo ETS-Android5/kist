@@ -28,6 +28,10 @@ public class MyApplication extends Application {
         PackageInfo packageInfo;
         String key = null;
 
+        FontsOverride.setDefaultFOnt(this, "SERIF", "fonts/roboto_bold.ttf");
+        FontsOverride.setDefaultFOnt(this, "SANS_SERIF", "fonts/roboto_regular.ttf");
+
+
         try {
             copyDataBase();
         } catch (PackageManager.NameNotFoundException e) {

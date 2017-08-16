@@ -22,7 +22,7 @@
                 android:layout_below="@id/image_pager"/>
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/image_pager">
@@ -39,15 +39,16 @@
                         android:text="THE BLOCKS HOSTEL"
                         android:layout_gravity="center_horizontal"
                         android:textSize="18sp"
+                        android:typeface="serif"
                         android:textColor="#000"
-                        android:textStyle="bold"
-                        android:layout_marginTop="20dp"/>
+                        android:textStyle="bold"/>
                     <TextView
                         android:id="@+id/desc1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:textSize="16sp"
+                        android:typeface="sans"
                         android:textColor="#000"
                         android:layout_marginTop="15dp"/>
                     <TextView
@@ -56,6 +57,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:textSize="16sp"
+                        android:typeface="sans"
                         android:textColor="#000"
                         android:layout_marginTop="5dp"/>
                     <TextView
@@ -65,6 +67,7 @@
                         android:layout_gravity="center_horizontal"
                         android:textSize="16sp"
                         android:textColor="#000"
+                        android:typeface="sans"
                         android:layout_marginTop="5dp"/>
                     <TextView
                         android:id="@+id/desc4"
@@ -73,6 +76,7 @@
                         android:layout_gravity="center_horizontal"
                         android:textSize="16sp"
                         android:textColor="#000"
+                        android:typeface="sans"
                         android:layout_marginTop="5dp"/>
                     <TextView
                         android:id="@+id/desc5"
@@ -81,6 +85,7 @@
                         android:layout_gravity="center_horizontal"
                         android:textSize="16sp"
                         android:textColor="#000"
+                        android:typeface="sans"
                         android:layout_marginTop="5dp"/>
                     <TextView
                         android:id="@+id/desc6"
@@ -89,6 +94,7 @@
                         android:layout_gravity="center_horizontal"
                         android:textSize="16sp"
                         android:textColor="#000"
+                        android:typeface="sans"
                         android:layout_marginTop="5dp"/>
                     <TextView
                         android:id="@+id/desc7"
@@ -97,6 +103,7 @@
                         android:layout_gravity="center_horizontal"
                         android:textSize="16sp"
                         android:textColor="#000"
+                        android:typeface="sans"
                         android:layout_marginTop="5dp"/>
                     <TextView
                         android:id="@+id/desc8"
@@ -104,11 +111,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:textSize="16sp"
+                        android:typeface="sans"
                         android:textColor="#000"
                         android:layout_marginTop="5dp"/>
                     <ImageView
                         android:id="@+id/map"
-                        android:layout_marginTop="40dp"
+                        android:layout_marginTop="20dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:src="@mipmap/showmapbutton"/>

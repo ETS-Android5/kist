@@ -59,7 +59,7 @@ public class TravelTipFragment extends Fragment {
 
             adapter = new TravelTipAdapter(getActivity(), items);
             tipsList.setAdapter(adapter);
-            setListViewHeightBasedOnChildren(tipsList);
+            //setListViewHeightBasedOnChildren(tipsList);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

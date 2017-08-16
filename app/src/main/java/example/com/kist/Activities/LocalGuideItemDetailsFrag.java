@@ -140,12 +140,16 @@ public class LocalGuideItemDetailsFrag extends Fragment implements View.OnClickL
     @Override
     public void onClick(View v) {
         if(v == about) {
-            about.setBackgroundColor(Color.parseColor("#8b8e8e"));
+            about.setBackgroundColor(Color.parseColor("#000000"));
+            about.setTextColor(Color.parseColor("#ffffff"));
+
             contact.setBackgroundResource(R.drawable.stroke_rect);
 
             setAboutFrag();
         } else if(v == contact) {
-            contact.setBackgroundColor(Color.parseColor("#8b8e8e"));
+            contact.setBackgroundColor(Color.parseColor("#000000"));
+            contact.setBackgroundColor(Color.parseColor("#ffffff"));
+
             about.setBackgroundResource(R.drawable.stroke_rect);
 
             ContactFragment fragment = new ContactFragment();
@@ -200,11 +204,10 @@ public class LocalGuideItemDetailsFrag extends Fragment implements View.OnClickL
             b.putString("fb", item.getFbLink());
         if(item.getInstaLink() != null)
             b.putString("insta", item.getInstaLink());
-        if(item.getDes3() != null)
+        if(item.getTaurl() != null)
             b.putString("ta", item.getTaurl());
-        if(item.getDes3() != null)
+        if(item.getOpeningHrs() != null)
             b.putString("opening", item.getOpeningHrs());
-
 
         fragment.setArguments(b);
         replaceFragment(fragment);

@@ -20,6 +20,7 @@
         android:hint="Password"
         android:textSize="16sp"
         android:padding="7dp"
+        android:inputType="textPassword"
         android:layout_below="@id/head"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"

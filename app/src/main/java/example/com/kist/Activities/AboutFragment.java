@@ -136,9 +136,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
     }
 
     private void openWebView(String url) {
-        Intent i = new Intent(getActivity(), WebViewActivity.class);
-        i.putExtra("url", url);
-        startActivity(i);
+        ((MainActivity) getActivity()).setUrl(url);
     }
 
 }

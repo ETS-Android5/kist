@@ -67,6 +67,8 @@ public class LocalGuideListAdapter extends BaseAdapter {
         TextView name = (TextView) v.findViewById(R.id.name);
         TextView blurb = (TextView) v.findViewById(R.id.blurb);
 
+        Log.e("postion : res", position + ":" + list.get(position).getResourceId() + "");
+
         thumb.setImageResource(list.get(position).getResourceId());
         name.setText(list.get(position).getName());
         blurb.setText(list.get(position).getBlurb());

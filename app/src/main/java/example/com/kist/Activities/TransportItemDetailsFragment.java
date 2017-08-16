@@ -1,5 +1,6 @@
 package example.com.kist.Activities;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -149,7 +150,11 @@ public class TransportItemDetailsFragment extends Fragment implements View.OnCli
     @Override
     public void onClick(View v) {
         if(map == v) {
+            Intent i = new Intent(getActivity(), ImageScreen.class);
+            i.putExtra("res", getResourceId("bangkok_public_transport_map"));
+            i.putExtra("head", "TRANSPORT");
 
+            startActivity(i);
         }
     }
 }

@@ -136,6 +136,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, View.On
 
             ImageView btnMyLocation = (ImageView) ((View) mapView.findViewById(1).getParent()).findViewById(2);
             btnMyLocation.setImageResource(R.mipmap.location);
+            btnMyLocation.getLayoutParams().height = 20;
+            btnMyLocation.getLayoutParams().width = 20;
 
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)
                     btnMyLocation.getLayoutParams();
@@ -144,8 +146,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, View.On
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
 
-            layoutParams.setMargins(30, 0, 0, 30);
+            mapView.setPadding(30, 0, 0, 30);
 
             if (getArguments().getBoolean("single", false)) {
                 selected = new MapObject();

@@ -3,6 +3,7 @@ package example.com.kist.Activities;
 import android.app.Dialog;
 import android.app.Notification;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -51,6 +53,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -74,7 +77,6 @@ public class NotificationFrament extends Fragment {
 
     ImageView send, gallery;
     EditText msg;
-
 
     String encodedImage = "";
 
@@ -127,6 +129,8 @@ public class NotificationFrament extends Fragment {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                hideKey();
+
                 if(selectedImage) {
                     postMessage("0", "", msg.getText().toString(), "Image");
                 } else {
@@ -187,8 +191,13 @@ public class NotificationFrament extends Fragment {
                     Type listType = new TypeToken<List<NotificationItem>>(){}.getType();
 
                     list = new Gson().fromJson(_list, listType);
+
+                    Collections.reverse(list);
+
                     adapter = new NotificationAdapter(getActivity(), list);
                     notificationList.setAdapter(adapter);
+
+                    notificationList.smoothScrollToPosition(adapter.getCount() -1);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -361,5 +370,13 @@ public class NotificationFrament extends Fragment {
         }
 
         return result.toString();
+    }
+
+    private void hideKey() {
+        View view = getActivity().getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

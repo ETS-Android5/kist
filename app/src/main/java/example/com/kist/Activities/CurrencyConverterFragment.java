@@ -26,10 +26,13 @@ import android.widget.TextView;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.HashMap;
 
 import example.com.kist.R;
 
@@ -49,6 +52,8 @@ public class CurrencyConverterFragment extends Fragment {
     int which = 0;
     String[] codes, currencies;
 
+    HashMap<String, String> codesMap = new HashMap<>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle SavedInstanceState) {
 
@@ -59,8 +64,19 @@ public class CurrencyConverterFragment extends Fragment {
         currAmnt1 = (EditText) v.findViewById(R.id.first_amount);
         currAmnt2 = (EditText) v.findViewById(R.id.sec_amount);
 
+        currAmnt1.setFocusable(false);
+        currAmnt1.setEnabled(false);
+
+        curr2.setText("Thai Baht");
+
         codes = getResources().getStringArray(R.array.currcode);
         currencies = getResources().getStringArray(R.array.currencies);
+
+        for(int i =0; i < currencies.length; ++i) {
+            codesMap.put(currencies[i], codes[i]);
+        }
+
+        Arrays.sort(currencies);
 
         curr1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,13 +97,15 @@ public class CurrencyConverterFragment extends Fragment {
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
 
                 if(i == EditorInfo.IME_ACTION_DONE) {
-                    toConvert = Float.parseFloat(currAmnt1.getText().toString());
-                    which = 1;
+                    if(!currAmnt1.getText().toString().isEmpty() && !currAmnt2.getText().toString().isEmpty()) {
+                        toConvert = Float.parseFloat(currAmnt1.getText().toString());
+                        which = 1;
 
-                    code1 = getCode(curr1.getText().toString());
-                    code2 = getCode(curr2.getText().toString());
+                        code1 = getCode(curr1.getText().toString());
+                        code2 = getCode(curr2.getText().toString());
 
-                    convert();
+                        convert();
+                    }
                 }
 
                 return false;
@@ -98,13 +116,15 @@ public class CurrencyConverterFragment extends Fragment {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if(i == EditorInfo.IME_ACTION_DONE) {
-                    toConvert = Float.parseFloat(currAmnt1.getText().toString());
-                    which = 2;
+                    if(!currAmnt2.getText().toString().isEmpty() && !currAmnt1.getText().toString().isEmpty()) {
+                        toConvert = Float.parseFloat(currAmnt1.getText().toString());
+                        which = 2;
 
-                    code1 = getCode(curr2.getText().toString());
-                    code2 = getCode(curr1.getText().toString());
+                        code1 = getCode(curr2.getText().toString());
+                        code2 = getCode(curr1.getText().toString());
 
-                    convert();
+                        convert();
+                    }
                 }
 
                 return false;
@@ -203,6 +223,10 @@ public class CurrencyConverterFragment extends Fragment {
             public void onClick(View view) {
                 if(first) {
                     curr1.setText(selected);
+
+                    currAmnt1.setFocusable(true);
+                    currAmnt1.setEnabled(true);
+
                 } else {
                     curr2.setText(selected);
                 }
@@ -222,12 +246,8 @@ public class CurrencyConverterFragment extends Fragment {
     }
 
     private String getCode(String cur) {
-        for(int i = 0; i < currencies.length; ++i) {
-            if(currencies[i].contains(cur))
-                return codes[i];
-        }
 
-        return "";
+        return codesMap.get(cur);
     }
 }
 

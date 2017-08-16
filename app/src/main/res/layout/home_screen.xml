@@ -199,6 +199,7 @@
             android:layout_above="@id/bottom_line"
             android:layout_below="@id/topLine"
             android:layout_width="match_parent"
+            android:paddingBottom="15dp"
             android:layout_height="match_parent"/>
     </RelativeLayout>
     <RelativeLayout
@@ -218,12 +219,12 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="MENU"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginTop="20dp"/>
-        <ScrollView
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/head">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -246,8 +247,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:text="HOME"
-                        android:textSize="16sp"
+                        android:text="Home"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         android:layout_marginTop="20dp"/>
                     <View
@@ -270,7 +271,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:text="About our hostel"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         android:layout_marginTop="20dp"/>
                     <View
@@ -292,8 +293,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:text="LOCAL GUIDE"
-                        android:textSize="16sp"
+                        android:text="Local guide"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         android:layout_marginTop="20dp"/>
                     <View
@@ -316,7 +317,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:text="Bookings"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         android:layout_marginTop="20dp"/>
                     <View
@@ -339,7 +340,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:text="Noticeboard"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         android:layout_marginTop="20dp"/>
                     <View
@@ -362,7 +363,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:text="Contact Us"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         android:layout_marginTop="20dp"/>
                     <View
@@ -385,7 +386,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:text="Feedback"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         android:layout_marginTop="20dp"/>
                     <View
@@ -408,11 +409,11 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:text="Developer"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         android:layout_marginTop="20dp"/>
                 </LinearLayout>
             </LinearLayout>
-        </ScrollView>
+        </android.support.v4.widget.NestedScrollView>
     </RelativeLayout>
 </android.support.v4.widget.DrawerLayout>

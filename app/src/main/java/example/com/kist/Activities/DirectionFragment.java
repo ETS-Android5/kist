@@ -57,7 +57,7 @@ public class DirectionFragment extends Fragment {
 
             adapter = new DirectionDescAdapter(getActivity(), items);
             detailsList.setAdapter(adapter);
-            setListViewHeightBasedOnChildren(detailsList);
+            //setListViewHeightBasedOnChildren(detailsList);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
