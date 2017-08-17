@@ -89,7 +89,8 @@ public class LocalGuideItemDetailsFrag extends Fragment implements View.OnClickL
                 slidingImages.stopAutoCycle();
 
                 setAboutFrag();
-                about.setBackgroundColor(Color.parseColor("#8b8e8e"));
+                about.setBackgroundColor(Color.parseColor("#000000"));
+                about.setTextColor(Color.parseColor("#ffffff"));
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
@@ -143,14 +144,16 @@ public class LocalGuideItemDetailsFrag extends Fragment implements View.OnClickL
             about.setBackgroundColor(Color.parseColor("#000000"));
             about.setTextColor(Color.parseColor("#ffffff"));
 
+            contact.setTextColor(Color.parseColor("#000000"));
             contact.setBackgroundResource(R.drawable.stroke_rect);
 
             setAboutFrag();
         } else if(v == contact) {
             contact.setBackgroundColor(Color.parseColor("#000000"));
-            contact.setBackgroundColor(Color.parseColor("#ffffff"));
+            contact.setTextColor(Color.parseColor("#ffffff"));
 
             about.setBackgroundResource(R.drawable.stroke_rect);
+            about.setTextColor(Color.parseColor("#000000"));
 
             ContactFragment fragment = new ContactFragment();
             Bundle b = new Bundle();

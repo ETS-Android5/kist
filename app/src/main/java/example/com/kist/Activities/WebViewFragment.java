@@ -22,7 +22,7 @@ public class WebViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle SavedInstanceState) {
 
-        View v = inflater.inflate(R.layout.details_fragment, viewGroup, false);
+        View v = inflater.inflate(R.layout.booking_fragment, viewGroup, false);
         webView = (WebView) v.findViewById(R.id.web);
 
         url = getArguments().getString("url", "");

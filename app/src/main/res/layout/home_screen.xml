@@ -199,7 +199,6 @@
             android:layout_above="@id/bottom_line"
             android:layout_below="@id/topLine"
             android:layout_width="match_parent"
-            android:paddingBottom="15dp"
             android:layout_height="match_parent"/>
     </RelativeLayout>
     <RelativeLayout

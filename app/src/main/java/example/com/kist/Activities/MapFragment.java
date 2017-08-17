@@ -9,7 +9,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MotionEventCompat;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -136,19 +138,20 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, View.On
 
             ImageView btnMyLocation = (ImageView) ((View) mapView.findViewById(1).getParent()).findViewById(2);
             btnMyLocation.setImageResource(R.mipmap.location);
-            btnMyLocation.getLayoutParams().height = 20;
-            btnMyLocation.getLayoutParams().width = 20;
+            btnMyLocation.getLayoutParams().height = pxToDp(30);
+            btnMyLocation.getLayoutParams().width = pxToDp(30);
 
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)
                     btnMyLocation.getLayoutParams();
 
             // position on left bottom
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 
-            mapView.setPadding(30, 0, 0, 30);
+            int margin = pxToDp(10);
+            layoutParams.setMargins(margin, margin, margin, margin);
 
             if (getArguments().getBoolean("single", false)) {
                 selected = new MapObject();
@@ -441,5 +444,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, View.On
             return null;
         }
 
+    }
+
+    public int pxToDp(int pix) {
+
+        final int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, pix,
+                getResources().getDisplayMetrics());
+
+        return margin;
     }
 }

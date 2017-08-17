@@ -109,6 +109,7 @@
                     <example.com.kist.Constant.ExpandableHeightGridView
                         android:id="@+id/room_types"
                         android:layout_width="match_parent"
+                        android:divider="@null"
                         android:layout_height="wrap_content"
                         android:numColumns="2"
                         android:layout_marginTop="40dp"
@@ -128,6 +129,7 @@
                     <example.com.kist.Constant.ExpandableHeightGridView
                         android:id="@+id/facilities"
                         android:layout_width="match_parent"
+                        android:divider="@null"
                         android:layout_height="wrap_content"
                         android:numColumns="2"
                         android:stretchMode="columnWidth"
