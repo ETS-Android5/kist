@@ -53,6 +53,14 @@
                     android:textSize="16sp"
                     android:textColor="#000"
                     android:layout_marginTop="15dp"/>
+                <ImageView
+                    android:id="@+id/book"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/booknow"/>
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

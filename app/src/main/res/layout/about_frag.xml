@@ -95,12 +95,12 @@
         android:layout_marginTop="15dp"/>
     <ImageView
         android:id="@+id/show_map"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@mipmap/showmapbutton"/>
     <LinearLayout
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="3">

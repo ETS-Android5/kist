@@ -108,7 +108,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, View.On
         @Override
     public void onMapReady(GoogleMap googleMap) {
             this.googleMap = googleMap;
+
             MapsInitializer.initialize(getActivity());
+
+            googleMap.setMaxZoomPreference(14.0f);
 
             googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             googleMap.setInfoWindowAdapter(new MyInfoWindowAdapter());
@@ -151,7 +154,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, View.On
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 
             int margin = pxToDp(10);
-            layoutParams.setMargins(margin, margin, margin, margin);
+
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+            int width = displayMetrics.widthPixels;
+
+            layoutParams.setMargins(margin, margin, width - margin, margin);
 
             if (getArguments().getBoolean("single", false)) {
                 selected = new MapObject();

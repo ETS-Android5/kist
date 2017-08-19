@@ -64,9 +64,6 @@ public class CurrencyConverterFragment extends Fragment {
         currAmnt1 = (EditText) v.findViewById(R.id.first_amount);
         currAmnt2 = (EditText) v.findViewById(R.id.sec_amount);
 
-        currAmnt1.setFocusable(false);
-        currAmnt1.setEnabled(false);
-
         curr2.setText("Thai Baht");
 
         codes = getResources().getStringArray(R.array.currcode);

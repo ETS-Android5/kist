@@ -338,7 +338,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             menu.setVisibility(View.GONE);
             login.setVisibility(View.VISIBLE);
 
-            header.setText("NOTIFICATIONS");
+            header.setText("NOTICEBOARD");
             back.setVisibility(View.VISIBLE);
         } else if(position == 17) {
             changeAlphaAll();
@@ -583,5 +583,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void setUrl(String url) {
         this.url = url;
         setPage(18);
+    }
+
+    public void setHeader(String text) {
+        header.setText(text);
     }
 }

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
@@ -36,6 +37,7 @@ public class RoomFragment extends Fragment {
     TextView title, price, desc;
 
     SQLiteDatabase db;
+    ImageView book;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle SavedInstanceState) {
@@ -82,6 +84,14 @@ public class RoomFragment extends Fragment {
         title = (TextView) v.findViewById(R.id.title);
         price = (TextView) v.findViewById(R.id.price);
         desc = (TextView) v.findViewById(R.id.desc);
+
+        book = (ImageView) v.findViewById(R.id.book);
+        book.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity) getActivity()).setPage(3);
+            }
+        });
 
         images = (SliderLayout) v.findViewById(R.id.image_pager);
     }

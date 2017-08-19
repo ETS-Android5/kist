@@ -67,6 +67,8 @@ public class LocalGuideItemDetailsFrag extends Fragment implements View.OnClickL
 
         item = new Gson().fromJson(getArguments().getString("item", ""), LocalGuideListItem.class);
 
+        ((MainActivity) getActivity()).setHeader(item.getType().toUpperCase());
+
         if(item != null) {
             try {
                 DATABASE_PATH = getActivity().getPackageManager().

@@ -85,7 +85,7 @@ public class NotificationAdapter extends BaseAdapter {
             public void onClick(View view) {
                 Intent i = new Intent(context, ImageScreen.class);
                 i.putExtra("image", list.get(position).getImage());
-                i.putExtra("head", "NOTIFICATION");
+                i.putExtra("head", "NOTICEBOARD");
                 context.startActivity(i);
             }
         });
