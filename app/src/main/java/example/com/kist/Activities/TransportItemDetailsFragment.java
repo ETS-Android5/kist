@@ -108,6 +108,7 @@ public class TransportItemDetailsFragment extends Fragment implements View.OnCli
             des7.setText(item.getDescription7());
             des8.setText(item.getDescription8());
 
+            map.setOnClickListener(this);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -152,6 +153,7 @@ public class TransportItemDetailsFragment extends Fragment implements View.OnCli
         if(map == v) {
             Intent i = new Intent(getActivity(), ImageScreen.class);
             i.putExtra("res", getResourceId("bangkok_public_transport_map"));
+            Log.e("res for gif", getResourceId("bangkok_public_transport_map") + "");
             i.putExtra("head", "TRANSPORT");
 
             startActivity(i);

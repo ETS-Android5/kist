@@ -56,7 +56,6 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         }
 
         titleV.setText(title);
-        openHrsV.setText(openingHrs);
         desc1V.setText(desc1);
         desc2V.setText(desc2);
         desc3V.setText(desc3);
@@ -67,6 +66,11 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         } else {
             closestC.setText(closestStop);
         }
+
+        if(openingHrs.isEmpty()) {
+            openHrsV.setVisibility(View.GONE);
+        } else
+            openHrsV.setText(openingHrs);
 
         if(gettingThere.isEmpty()) {
             getThereH.setVisibility(View.GONE);

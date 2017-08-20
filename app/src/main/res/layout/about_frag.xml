@@ -25,7 +25,7 @@
         android:text="7 am - 9 pm"
         android:textStyle="bold"
         android:textColor="#000"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="10dp"/>
     <TextView
         android:id="@+id/desc1"
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
         android:textSize="16sp"
         android:typeface="sans"
         android:textColor="#000"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="10dp"/>
     <TextView
         android:id="@+id/desc2"
         android:typeface="sans"
@@ -63,7 +63,7 @@
         android:text="Closest Stop"
         android:textStyle="bold"
         android:textColor="#000"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="5dp"/>
     <TextView
         android:id="@+id/closestContent"
         android:typeface="sans"
@@ -72,7 +72,7 @@
         android:layout_gravity="center_horizontal"
         android:textSize="16sp"
         android:textColor="#000"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="10dp"/>
     <TextView
         android:id="@+id/getHead"
         android:layout_width="wrap_content"
@@ -83,7 +83,7 @@
         android:text="Getting There"
         android:textStyle="bold"
         android:textColor="#000"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="10dp"/>
     <TextView
         android:id="@+id/getContent"
         android:layout_width="match_parent"
@@ -92,15 +92,15 @@
         android:textSize="16sp"
         android:textColor="#000"
         android:typeface="sans"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="10dp"/>
     <ImageView
         android:id="@+id/show_map"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@mipmap/showmapbutton"/>
     <LinearLayout
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="3">

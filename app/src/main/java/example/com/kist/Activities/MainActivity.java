@@ -282,7 +282,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if(position == 6) {
             changeAlphaAll();
 
-            header.setText(itemType);
             back.setVisibility(View.VISIBLE);
         } else if(position == 7) {
             changeAlphaAll();

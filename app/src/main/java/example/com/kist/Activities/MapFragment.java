@@ -111,7 +111,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, View.On
 
             MapsInitializer.initialize(getActivity());
 
-            googleMap.setMaxZoomPreference(14.0f);
+            googleMap.setMaxZoomPreference(3.0f);
 
             googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             googleMap.setInfoWindowAdapter(new MyInfoWindowAdapter());

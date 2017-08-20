@@ -94,7 +94,7 @@ public class CurrencyConverterFragment extends Fragment {
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
 
                 if(i == EditorInfo.IME_ACTION_DONE) {
-                    if(!currAmnt1.getText().toString().isEmpty() && !currAmnt2.getText().toString().isEmpty()) {
+                    if(!currAmnt1.getText().toString().isEmpty() && !curr1.getText().toString().isEmpty()) {
                         toConvert = Float.parseFloat(currAmnt1.getText().toString());
                         which = 1;
 
@@ -113,7 +113,7 @@ public class CurrencyConverterFragment extends Fragment {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if(i == EditorInfo.IME_ACTION_DONE) {
-                    if(!currAmnt2.getText().toString().isEmpty() && !currAmnt1.getText().toString().isEmpty()) {
+                    if(!currAmnt2.getText().toString().isEmpty() && !curr2.getText().toString().isEmpty()) {
                         toConvert = Float.parseFloat(currAmnt1.getText().toString());
                         which = 2;
 

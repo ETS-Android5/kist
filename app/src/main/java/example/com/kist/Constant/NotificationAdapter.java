@@ -3,6 +3,9 @@ package example.com.kist.Constant;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,6 +87,7 @@ public class NotificationAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, ImageScreen.class);
+
                 i.putExtra("image", list.get(position).getImage());
                 i.putExtra("head", "NOTICEBOARD");
                 context.startActivity(i);

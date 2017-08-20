@@ -67,7 +67,12 @@ public class LocalGuideItemDetailsFrag extends Fragment implements View.OnClickL
 
         item = new Gson().fromJson(getArguments().getString("item", ""), LocalGuideListItem.class);
 
-        ((MainActivity) getActivity()).setHeader(item.getType().toUpperCase());
+        if(item.getType().contains("rink"))
+            ((MainActivity) getActivity()).setHeader("DRINKS");
+        else if(item.getType().contains("raction"))
+            ((MainActivity) getActivity()).setHeader("ATTRACTIONS");
+        else if(item.getType().contains("Food"))
+            ((MainActivity) getActivity()).setHeader("EATS");
 
         if(item != null) {
             try {

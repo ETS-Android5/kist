@@ -139,6 +139,8 @@ public class NotificationFrament extends Fragment {
                     else
                         Toast.makeText(getActivity(), "Please select an Image or a Message to post.", Toast.LENGTH_SHORT).show();
                 }
+
+                msg.setText("");
             }
         });
     }
@@ -328,6 +330,7 @@ public class NotificationFrament extends Fragment {
                     String result = sb.toString();
 
                     Log.e("result", result);
+                    encodedImage = "";
 
                     connection.disconnect();
 
@@ -348,6 +351,8 @@ public class NotificationFrament extends Fragment {
             protected void onPostExecute(Void args) {
                 gallery.setEnabled(true);
                 send.setEnabled(true);
+
+                load();
 
                 NotificationFrament.this.msg.setText("");
             }
