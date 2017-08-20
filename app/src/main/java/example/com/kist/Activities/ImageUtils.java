@@ -26,7 +26,7 @@ public class ImageUtils {
         Bitmap scaledBitmap = null;
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
-        Bitmap bmp = BitmapFactory.decodeResource(c.getResources(), resId);
+        Bitmap bmp = BitmapFactory.decodeResource(c.getResources(), resId, options);
         int actualHeight = options.outHeight;
         int actualWidth = options.outWidth;
         float imgRatio = (float) actualWidth / (float) actualHeight;
@@ -52,7 +52,7 @@ public class ImageUtils {
         options.inInputShareable = true;
         options.inTempStorage = new byte[16 * 1024];
         try {
-            bmp = BitmapFactory.decodeResource(c.getResources(), resId);
+            bmp = BitmapFactory.decodeResource(c.getResources(), resId, options);
         } catch (OutOfMemoryError exception) {
             exception.printStackTrace();
         }
