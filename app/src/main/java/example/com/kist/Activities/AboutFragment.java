@@ -55,6 +55,16 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
             openingHrs = getArguments().getString("opening", "");
         }
 
+        if(desc2.isEmpty())
+            desc2V.setVisibility(View.GONE);
+        else
+            desc2V.setText(desc2);
+
+        if(desc3.isEmpty())
+            desc3V.setVisibility(View.GONE);
+        else
+            desc3V.setText(desc3);
+
         titleV.setText(title);
         desc1V.setText(desc1);
         desc2V.setText(desc2);
